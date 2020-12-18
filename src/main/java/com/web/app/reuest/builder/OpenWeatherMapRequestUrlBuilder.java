@@ -1,26 +1,34 @@
 package com.web.app.reuest.builder;
 
 import com.web.app.model.Coordinates;
+import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
+@Configuration
 public class OpenWeatherMapRequestUrlBuilder {
 
-    private final ApiConfiguration apiConfiguration;
+    @Value("${base-url}")
+    private String baseUrl;
 
-    public OpenWeatherMapRequestUrlBuilder(ApiConfiguration apiConfiguration) {
-        this.apiConfiguration = apiConfiguration;
-    }
+    @Value("${authentication-token}")
+    private String authenticationToken;
 
-    public URL buildUrl(Coordinates coordinates) throws MalformedURLException {
-        String url = new StringBuilder(apiConfiguration.buildBaseUrl())
+    @Bean
+    @Autowired
+    @SneakyThrows
+    public URL buildUrl(Coordinates coordinates) {
+        String url = new StringBuilder(baseUrl)
                 .append("/onecall")
                 .append("?lat=").append(coordinates.getLatitude())
                 .append("&lon=").append(coordinates.getLongitude())
                 .append("&units=").append("metric")
                 .append("&exclude=current,hourly,minutely")
-                .append("&appid=").append(apiConfiguration.getAuthenticationToken())
+                .append("&appid=").append(authenticationToken)
                 .toString();
 
         return new URL(url);

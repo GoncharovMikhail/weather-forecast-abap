@@ -1,4 +1,4 @@
-package com.web.app.forecast;
+package com.web.app.model.forecast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +15,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "lat",

@@ -1,27 +1,25 @@
 package com.web.app.mappers;
 
-import com.web.app.model.Coordinates;
-import com.web.app.reuest.executor.OpenWeatherMapRequestExecutor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
+@Service
 public class InputStreamMapper {
 
-    private final OpenWeatherMapRequestExecutor openWeatherMapRequestExecutor;
+    private final InputStream inputStream;
 
-    public InputStreamMapper(OpenWeatherMapRequestExecutor openWeatherMapRequestExecutor) {
-        this.openWeatherMapRequestExecutor = openWeatherMapRequestExecutor;
+    @Autowired
+    public InputStreamMapper(InputStream inputStream) {
+        this.inputStream = inputStream;
     }
 
-    public String mapInputStreamToString(Coordinates coordinates) throws IOException {
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(
-                        openWeatherMapRequestExecutor
-                                .getInputStream(coordinates)
-                )
-        );
+    public String mapInputStreamToString() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
         StringBuilder result = new StringBuilder();
 

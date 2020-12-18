@@ -1,13 +1,16 @@
-package com.web.app.forecast;
+package com.web.app.model.forecast;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Getter
+@ToString
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "dt",

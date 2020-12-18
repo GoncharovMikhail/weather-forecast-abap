@@ -1,27 +1,30 @@
 package com.web.app.reuest.executor;
 
-import com.web.app.model.Coordinates;
-import com.web.app.reuest.builder.OpenWeatherMapRequestUrlBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.URL;
 
+@Configuration
 public class OpenWeatherMapRequestExecutor {
 
-    private final OpenWeatherMapRequestUrlBuilder openWeatherMapRequestUrlBuilder;
+    private final URL url;
 
-    public OpenWeatherMapRequestExecutor(OpenWeatherMapRequestUrlBuilder openWeatherMapRequestUrlBuilder) {
-        this.openWeatherMapRequestUrlBuilder = openWeatherMapRequestUrlBuilder;
+    @Autowired
+    public OpenWeatherMapRequestExecutor(URL url) {
+        this.url = url;
     }
 
-    public InputStream getInputStream(Coordinates coordinates) {
+    @Bean
+    public InputStream getInputStream() {
         InputStream resultStream = null;
 
         try {
-            HttpURLConnection connection = (HttpURLConnection) openWeatherMapRequestUrlBuilder
-                    .buildUrl(coordinates)
-                    .openConnection();
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             connection.setRequestMethod("GET");
 
@@ -33,7 +36,7 @@ public class OpenWeatherMapRequestExecutor {
                     throw new IllegalAccessError("401 status - probably incorrect token");
                 case HttpURLConnection.HTTP_NOT_FOUND:
                 case HttpURLConnection.HTTP_BAD_REQUEST:
-                    throw new NullPointerException("400 or 404 status");
+                    throw new NullPointerException("400 or 404 status - probably incorrect URL");
             }
         } catch (IOException ex) {
             ex.printStackTrace();

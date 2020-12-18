@@ -1,4 +1,4 @@
-package com.web.app.forecast;
+package com.web.app.model.forecast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,22 +14,14 @@ import lombok.Getter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "day",
-        "min",
-        "max",
         "night",
         "eve",
         "morn"
 })
-public class Temp {
+public class FeelsLike {
 
     @JsonProperty("day")
     public Double day;
-
-    @JsonProperty("min")
-    public Double min;
-
-    @JsonProperty("max")
-    public Double max;
 
     @JsonProperty("night")
     public Double night;
@@ -38,7 +30,7 @@ public class Temp {
     public Double eve;
 
     @JsonProperty("morn")
-    public double morn;
+    public Double morn;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
