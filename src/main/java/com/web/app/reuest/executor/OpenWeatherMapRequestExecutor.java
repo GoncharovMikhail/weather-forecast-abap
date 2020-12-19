@@ -1,47 +1,26 @@
 package com.web.app.reuest.executor;
 
+import com.web.app.model.forecast.Forecast;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 
-@Configuration
+@Service
 public class OpenWeatherMapRequestExecutor {
 
-    private final URL url;
+    private final URI uri;
+
+    private final RestTemplate restTemplate;
 
     @Autowired
-    public OpenWeatherMapRequestExecutor(URL url) {
-        this.url = url;
+    public OpenWeatherMapRequestExecutor(URI uri, RestTemplate restTemplate) {
+        this.uri = uri;
+        this.restTemplate = restTemplate;
     }
 
-    @Bean
-    public InputStream getInputStream() {
-        InputStream resultStream = null;
-
-        try {
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("GET");
-
-            switch (connection.getResponseCode()) {
-                case HttpURLConnection.HTTP_OK:
-                    resultStream = connection.getInputStream();
-                    break;
-                case HttpURLConnection.HTTP_UNAUTHORIZED:
-                    throw new IllegalAccessError("401 status - probably incorrect token");
-                case HttpURLConnection.HTTP_NOT_FOUND:
-                case HttpURLConnection.HTTP_BAD_REQUEST:
-                    throw new NullPointerException("400 or 404 status - probably incorrect URL");
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return resultStream;
+    public Forecast getForecast() {
+        return restTemplate.getForObject(uri, Forecast.class);
     }
 }

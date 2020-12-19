@@ -40,9 +40,11 @@ public class Daily {
     @JsonProperty("sunset")
     public Integer sunset;
 
+    @ToString.Include
     @JsonProperty("temp")
     public Temp temp;
 
+    @ToString.Include
     @JsonProperty("feels_like")
     public FeelsLike feelsLike;
 
@@ -61,6 +63,7 @@ public class Daily {
     @JsonProperty("wind_deg")
     public Integer windDeg;
 
+    @ToString.Include
     @JsonProperty("weather")
     public List<Weather> weather = null;
 

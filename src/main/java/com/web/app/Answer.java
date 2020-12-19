@@ -1,23 +1,27 @@
 package com.web.app;
 
-import com.web.app.mappers.JsonMapper;
+import com.web.app.reuest.executor.OpenWeatherMapRequestExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+//TODO ужас
 @Component
 public class Answer {
 
-    private final JsonMapper jsonMapper;
+    private final OpenWeatherMapRequestExecutor openWeatherMapRequestExecutor;
 
     @Autowired
-    public Answer(JsonMapper jsonMapper) {
-        this.jsonMapper = jsonMapper;
+    public Answer(OpenWeatherMapRequestExecutor openWeatherMapRequestExecutor) {
+        this.openWeatherMapRequestExecutor = openWeatherMapRequestExecutor;
     }
 
+    /**
+     * TODO а как нормально-то распечатать все это дело(для задания).Н у в плане гдк? Постконстракт - явно плохая идея.
+     */
     @PostConstruct
-    public void getAnswer() {
-        System.out.println(jsonMapper.mapJsonToForecast());
+    public void answer() {
+        System.out.println(openWeatherMapRequestExecutor.getForecast());
     }
 }

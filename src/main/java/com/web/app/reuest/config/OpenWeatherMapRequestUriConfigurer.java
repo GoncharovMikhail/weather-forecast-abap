@@ -1,4 +1,4 @@
-package com.web.app.reuest.builder;
+package com.web.app.reuest.config;
 
 import com.web.app.model.Coordinates;
 import lombok.SneakyThrows;
@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.net.URL;
+import java.net.URI;
 
 @Configuration
-public class OpenWeatherMapRequestUrlBuilder {
+public class OpenWeatherMapRequestUriConfigurer {
 
     @Value("${base-url}")
     private String baseUrl;
@@ -21,8 +21,8 @@ public class OpenWeatherMapRequestUrlBuilder {
     @Bean
     @Autowired
     @SneakyThrows
-    public URL buildUrl(Coordinates coordinates) {
-        String url = new StringBuilder(baseUrl)
+    public URI buildUri(Coordinates coordinates) {
+        String stringUri = new StringBuilder(baseUrl)
                 .append("/onecall")
                 .append("?lat=").append(coordinates.getLatitude())
                 .append("&lon=").append(coordinates.getLongitude())
@@ -31,6 +31,6 @@ public class OpenWeatherMapRequestUrlBuilder {
                 .append("&appid=").append(authenticationToken)
                 .toString();
 
-        return new URL(url);
+        return new URI(stringUri);
     }
 }
