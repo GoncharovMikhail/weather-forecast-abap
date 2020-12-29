@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles/common.css">
+</head>
+<body>
+<h1>Welcome to our morning weather service</h1>
+<div class="input-coordinates">
+    <input type="text" id="input-latitude" placeholder="input latitude">
+    <br>
+    <input type="text" id="input-longitude" placeholder="input longitude">
+    <br>
+    <input type="submit" id="submit" value="submit" onclick="onSubmitButtonClick()"/>
+</div>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="module">
+    import {onSubmitButtonClick} from '/scripts/welcome.js';
+
+    window.onSubmitButtonClick = function () {
+        onSubmitButtonClick();
+    }
+
+</script>
+</html>
