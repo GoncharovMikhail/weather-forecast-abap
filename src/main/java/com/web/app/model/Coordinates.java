@@ -1,15 +1,13 @@
 package com.web.app.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@ToString
 public class Coordinates {
 
-    private final float latitude;
+    private float latitude;
 
-    private final float longitude;
+    private float longitude;
 }
