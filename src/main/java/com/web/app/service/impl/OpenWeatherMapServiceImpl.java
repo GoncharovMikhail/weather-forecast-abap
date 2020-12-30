@@ -1,5 +1,6 @@
 package com.web.app.service.impl;
 
+import com.web.app.model.Coordinates;
 import com.web.app.model.forecast.Forecast;
 import com.web.app.service.OpenWeatherMapService;
 import com.web.app.util.UriBuilder;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.web.app.model.Coordinates;
 
 import java.net.URI;
 import java.net.URISyntaxException;

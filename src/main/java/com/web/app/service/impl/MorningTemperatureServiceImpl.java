@@ -1,20 +1,41 @@
 package com.web.app.service.impl;
 
+import com.web.app.model.forecast.Forecast;
 import com.web.app.service.MorningTemperatureService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 
 @Service
+@PropertySource("forecast.properties")
 @Slf4j
 public class MorningTemperatureServiceImpl implements MorningTemperatureService {
 
-    public double getAverage(List<Double> morningTemperature) {
-        OptionalDouble average = morningTemperature
+    @Value("${amount-of-days}")
+    private Integer amountOfDays;
+
+    private List<Double> listOfMorningTemperatures;
+
+    private void initializeListOfMorningTemperatureIfNeeded(Forecast forecast) {
+        if (listOfMorningTemperatures == null) {
+            listOfMorningTemperatures = forecast
+                    .getDaily().stream()
+                    .map(daily -> daily.getTemp().getMorn())
+                    .collect(Collectors.toList())
+                    .subList(0, amountOfDays);
+        }
+    }
+
+    public double getAverageMorningTemperature(Forecast forecast) {
+        initializeListOfMorningTemperatureIfNeeded(forecast);
+
+        OptionalDouble average = listOfMorningTemperatures
                 .stream()
                 .mapToDouble(d -> d)
                 .average();
@@ -26,8 +47,10 @@ public class MorningTemperatureServiceImpl implements MorningTemperatureService 
         throw new IllegalArgumentException("Couldn't compute the average morning temperature");
     }
 
-    public double getMaximum(List<Double> morningTemperature) {
-        Double max = Collections.max(morningTemperature);
+    public double getMaximalMorningTemperature(Forecast forecast) {
+        initializeListOfMorningTemperatureIfNeeded(forecast);
+
+        Double max = Collections.max(listOfMorningTemperatures);
         if (max != null) {
             return max;
         }

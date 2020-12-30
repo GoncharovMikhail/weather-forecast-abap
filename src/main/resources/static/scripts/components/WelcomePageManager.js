@@ -16,14 +16,12 @@ export default class WelcomePageManager {
         let latitude = this.welcomePageDataResolver.resolveLatitude();
         let longitude = this.welcomePageDataResolver.resolveLongitude();
 
-        
         try {
-            WelcomePageDataVerifier.verifyLatitude(latitude);
-            WelcomePageDataVerifier.verifyLongitude(longitude);
+            WelcomePageDataVerifier.verifyLatitudeAndLongitude(latitude, longitude)
         } catch (e) {
             alert('Wrong input');
+            return;
         }
-        
 
         this.welcomePageGetRequestsExecutor.executeGetRequestForForecast(latitude, longitude);
     }

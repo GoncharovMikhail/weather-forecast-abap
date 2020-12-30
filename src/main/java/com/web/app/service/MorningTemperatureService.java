@@ -1,10 +1,10 @@
 package com.web.app.service;
 
-import java.util.List;
+import com.web.app.model.forecast.Forecast;
 
 public interface MorningTemperatureService {
 
-    double getAverage(List<Double> morningTemperature);
+    double getAverageMorningTemperature(Forecast forecast);
 
-    double getMaximum(List<Double> morningTemperature);
+    double getMaximalMorningTemperature(Forecast forecast);
 }
