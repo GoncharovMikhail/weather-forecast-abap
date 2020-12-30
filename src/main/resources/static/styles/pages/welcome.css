@@ -1,0 +1,24 @@
+h1 {
+    margin-top: 5%;
+    font: 900 220%/220% 'Montserrat', sans-serif;
+    color: #F4E2D8;
+}
+
+.container {
+    display: inline-block;
+    text-align: center;
+    margin-top: 8%;
+    padding: 8% 10%;
+    background-color: rgba(255, 255, 255, .1);
+}
+
+input, input::placeholder, input:focus {
+    padding-top: 12%;
+    text-transform: uppercase;
+    text-align: center;
+    background: transparent;
+    border: none;
+    font: 700 120%/120% 'Montserrat', sans-serif;
+    color: white;
+    outline: white;
+}

@@ -1,0 +1,26 @@
+table {
+    margin: 5% auto;
+    font: 900 150%/150% 'Montserrat', sans-serif;
+}
+
+thead {
+    color: rgba(255, 255, 255, .3);
+}
+
+table tr td {
+    background-color: rgba(255, 255, 255, .2);
+    color: white;
+    text-align: left;
+}
+
+table th,
+table td {
+    padding: 3% 2%;
+}
+
+table thead tr th:nth-child(1),
+table tbody tr td:nth-child(1) {
+    width: 50%;
+    min-width: 80px;
+    word-break: break-all;
+}

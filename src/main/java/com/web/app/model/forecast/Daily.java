@@ -1,13 +1,16 @@
-package com.web.app.forecast;
+package com.web.app.model.forecast;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Getter
+@ToString
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
         "dt",
@@ -37,9 +40,11 @@ public class Daily {
     @JsonProperty("sunset")
     public Integer sunset;
 
+    @ToString.Include
     @JsonProperty("temp")
     public Temp temp;
 
+    @ToString.Include
     @JsonProperty("feels_like")
     public FeelsLike feelsLike;
 
@@ -58,6 +63,7 @@ public class Daily {
     @JsonProperty("wind_deg")
     public Integer windDeg;
 
+    @ToString.Include
     @JsonProperty("weather")
     public List<Weather> weather = null;
 

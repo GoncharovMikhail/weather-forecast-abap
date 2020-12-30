@@ -1,30 +1,35 @@
-package com.web.app.forecast;
+package com.web.app.model.forecast;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.Getter;
+import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
+@ToString
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "id",
-        "main",
-        "description",
-        "icon"
+        "day",
+        "night",
+        "eve",
+        "morn"
 })
-public class Weather {
+public class FeelsLike {
 
-    @JsonProperty("id")
-    public Integer id;
+    @JsonProperty("day")
+    public Double day;
 
-    @JsonProperty("main")
-    public String main;
+    @JsonProperty("night")
+    public Double night;
 
-    @JsonProperty("description")
-    public String description;
+    @JsonProperty("eve")
+    public Double eve;
 
-    @JsonProperty("icon")
-    public String icon;
+    @JsonProperty("morn")
+    public Double morn;
 
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
@@ -38,4 +43,5 @@ public class Weather {
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
     }
+
 }
