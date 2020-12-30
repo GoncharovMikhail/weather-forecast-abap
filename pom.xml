@@ -24,6 +24,15 @@
                 <configuration>
                     <mainClass>com.web.app.OpenWeatherMapApplicationRunner</mainClass>
                 </configuration>
+
+                <!-- ADDED -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 
